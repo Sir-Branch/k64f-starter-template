@@ -1,0 +1,5 @@
+sdk_compiler
+bin
+build
+.vscode
+*.h.in

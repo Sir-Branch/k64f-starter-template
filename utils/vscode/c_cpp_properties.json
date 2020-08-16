@@ -1,0 +1,29 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "/opt/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/include/c++/8.2.1/**",
+                "/opt/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/include/c++/8.2.1/arm-none-eabi/**",
+                "/opt/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/include/c++/8.2.1/backward/**",
+                "/opt/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/8.2.1/include/**",
+                "/opt/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/8.2.1/include-fixed/**",
+                "/opt/arm-none-eabi-gcc/bin/../lib/gcc/arm-none-eabi/8.2.1/../../../../arm-none-eabi/include/**"
+            ],
+            "defines": [
+                "NRF52840",
+                "NRF52840_XXAA",
+                "BOARD_CUSTOM",
+                "SOFTDEVICE_PRESENT",
+                "S140",
+                "SWI_DISABLE0",
+                "BLE_STACK_SUPPORT_REQD",
+                "NRF_SD_BLE_API_VERSION=6"
+            ],
+            "compilerPath": "/opt/arm-none-eabi-gcc/bin/arm-none-eabi-gcc",
+            "intelliSenseMode": "gcc-x64"
+        }
+    ],
+    "version": 4
+}

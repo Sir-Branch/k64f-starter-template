@@ -1,0 +1,26 @@
+{
+  // Visual Studio Code launch.json 
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "gnu-debugger",
+      "request": "launch",
+      "name": "Debug NRF52",
+      "program": "${workspaceFolder}/bin/sample.elf",
+      "toolchain": "/opt/arm-none-eabi-gcc/bin",
+      "client": "arm-none-eabi-gdb",
+      "server": "JLinkGDBServer",
+      "serverArgs": [
+        "-device", "NRF52840_XXAA",
+        "-if", "SWD",
+        "-speed", "4000"
+      ],
+      "serverHost": "localhost",
+      "serverPort": 2331,
+      "customVariables": [],
+      "autoRun": false,
+      "debugOutput": false,
+      "preLaunchTask": ""
+    }
+  ]
+}
