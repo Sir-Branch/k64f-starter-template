@@ -15,4 +15,4 @@ if ($debug) {
 }
 [string]$FLAG_FW_TARGET = $fw
 
-docker run -it --rm --name nrf52_compile_env -v ${PROJECT_ROOT}:/external nrf52_compile_env /external/toolchain/linux_compile.sh $FLAG_CLEAN --fw $FLAG_FW_TARGET
+docker run -it --rm --name mk64f_compile_env -v ${PROJECT_ROOT}:/external mk64f_compile_env /external/toolchain/linux_compile.sh $FLAG_CLEAN --fw $FLAG_FW_TARGET

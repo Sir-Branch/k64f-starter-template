@@ -1,65 +1,70 @@
-#include "stdbool.h"
-
-#include <nrf_delay.h>
-#include <nrf_drv_clock.h>
-#include <nrf_log.h>
-#include <nrf_log_ctrl.h>
-#include <nrf_log_default_backends.h>
-#include <nrf_pwr_mgmt.h>
-
-#include <app_error.h>
-#include <app_timer.h>
-
-void log_init(void) {
-    ret_code_t err_code = NRF_LOG_INIT(NULL);
-    APP_ERROR_CHECK(err_code);
-
-    NRF_LOG_DEFAULT_BACKENDS_INIT();
-}
-
-void power_management_init(void) {
-    ret_code_t err_code;
-    err_code = nrf_pwr_mgmt_init();
-    APP_ERROR_CHECK(err_code);
-}
-
-/** Application main function.
+/*
+ * Copyright 2016-2020 NXP
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without modification,
+ * are permitted provided that the following conditions are met:
+ *
+ * o Redistributions of source code must retain the above copyright notice, this list
+ *   of conditions and the following disclaimer.
+ *
+ * o Redistributions in binary form must reproduce the above copyright notice, this
+ *   list of conditions and the following disclaimer in the documentation and/or
+ *   other materials provided with the distribution.
+ *
+ * o Neither the name of NXP Semiconductor, Inc. nor the names of its
+ *   contributors may be used to endorse or promote products derived from this
+ *   software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR
+ * ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+ * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+ 
+/**
+ * @file    MK64FN1M0xxx12_Project_my_test_project.c
+ * @brief   Application entry point.
+ */
+#include <stdio.h>
+#include "board.h"
+#include "peripherals.h"
+#include "pin_mux.h"
+#include "clock_config.h"
+#include "MK64F12.h"
+// #include "fsl_debug_console.h"
+/* TODO: insert other include files here. */
 
+/* TODO: insert other definitions and declarations here. */
+
+/*
+ * @brief   Application entry point.
+ */
 int main(void) {
-    nrf_drv_clock_init();
-    log_init();
-    power_management_init();
-    app_timer_init();
 
-    nrf_delay_us(1000);
+  	/* Init board hardware. */
+    BOARD_InitBootPins();
+    BOARD_InitBootClocks();
+    BOARD_InitBootPeripherals();
+  	// /* Init FSL debug console. */
+    // BOARD_InitDebugConsole();
 
-    while (true) {
-        nrf_delay_us(1000);
+    PRINTF("Hello World\n");
+
+    /* Force the counter to be placed into memory. */
+    volatile static int i = 0 ;
+    /* Enter an infinite loop, just incrementing a counter. */
+    while(1) {
+        i++ ;
+        /* 'Dummy' NOP to allow source level single stepping of
+            tight while() loop */
+        __asm volatile ("nop");
     }
-}
-
-void app_error_fault_handler(uint32_t id, uint32_t pc, uint32_t info) {
-    //__disable_irq();
-    // NRF_LOG_FINAL_FLUSH();
-
-    if (id == NRF_FAULT_ID_SDK_ASSERT) {
-        assert_info_t *p_info = (assert_info_t *)info;
-    } else if (id == NRF_FAULT_ID_SDK_ERROR) {
-        error_info_t *p_info = (error_info_t *)info;
-    } else {
-    }
-
-    nrf_delay_us(100 * 1000);
-    NVIC_SystemReset();
-}
-
-void assert_nrf_callback(uint16_t line_num, const uint8_t *file_name) {
-    assert_info_t assert_info = {
-        .line_num = line_num,
-        .p_file_name = file_name,
-    };
-    app_error_fault_handler(NRF_FAULT_ID_SDK_ASSERT, 0, (uint32_t)(&assert_info));
-
-    UNUSED_VARIABLE(assert_info);
+    return 0 ;
 }

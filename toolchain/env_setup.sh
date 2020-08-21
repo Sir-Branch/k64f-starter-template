@@ -24,7 +24,7 @@ case $OPERATING_SYSTEM in
     ;;
 esac
 
-docker build -t nrf52_compile_env $PROJECT_ROOT/toolchain \
+docker build -t mk64f_compile_env $PROJECT_ROOT/toolchain \
  --build-arg USER_USERNAME=`whoami` \
  --build-arg USER_UID=$USER_UID \
  --build-arg USER_GID=$USER_GID
