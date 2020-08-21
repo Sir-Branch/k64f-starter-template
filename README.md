@@ -22,7 +22,7 @@ It is not a one-size-fits-all environment, some customization and porting from t
 ## Build Environment Installation
 Please follow the installation instructions for each of the supported build environments.
 
-### Windows
+### Windows (Enterprise, Educational or Pro, DO NOT USE HOME)
 * Ensure you have Docker installed, following [these instructions](https://docs.docker.com/docker-for-windows/install/). Be sure to add more resources to the virtual machine that Docker is creating for you.
 
 ### Linux, MacOS
