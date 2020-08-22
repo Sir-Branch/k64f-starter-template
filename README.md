@@ -46,6 +46,10 @@ Please follow the installation instructions for each of the supported platforms.
 
 **Note on target selection**: The name of each target is specified by those folders prefixed by `fx-`. One must specify the folder name without the prefix. (Eg. `--fw my-project` to select `fw-my-proyect`.)
 
+## Reference Project
+https://github.com/pisontechnology/nrf52-starter-template
+https://github.com/peakhunt/frdm-k64f-projects
+
 ## License
 All components within this project that have not been bundled from external creators, are licensed under the terms of the [MIT Licence](LICENCE.md).
 
