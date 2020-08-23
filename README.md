@@ -1,5 +1,5 @@
 # K64F Starter Template -- Not tested waiting for DEV-BOARD!
-This project contains a starter template and a lot of bundled tools to allow a quick start developing for the NXP K64F on a your IDE or text editor of choice. It is basically a CMake wrapper ontop of the NXP FRDM-K64F SDK v2.7.0.
+This project contains a starter template and a lot of bundled tools to allow a quick start developing for the NXP K64F on your IDE or text editor of choice. It is basically a CMake wrapper ontop of the NXP FRDM-K64F SDK v2.7.0.
 
 It is not a one-size-fits-all environment, some customization and porting from the original SDK might still be needed, but for the most common and basic stuff, you should be good to go with this.
 
@@ -39,6 +39,28 @@ Please follow the installation instructions for each of the supported platforms.
   * Use `--fw` to select which firmware target to build.
 
 **Note on target selection**: The name of each target is specified by those folders prefixed by `fx-`. One must specify the folder name without the prefix. (Eg. `--fw my-project` to select `fw-my-proyect`.)
+
+## [Flashing and Debugging](https://github.com/peakhunt/frdm-k64f-projects#flashing--debugging)
+For flashing and debugging it's best to go for Segger OpenSDA and JLink. Just download Segger OpenSDA V2.0 from [segger web site](https://www.segger.com/downloads/jlink/#JLinkOpenSDABoardSpecificFirmwares). Be sure to download Board-Specific Firmware.
+
+With Segger OpenSDA, flashing is just a matter of drag & drop. If it doesn't work, you might have installed a generic firmware.
+
+To debug,
+
+1. JLinkGDBServer -device MK64FN1M0xxx12 -if SWD
+2. arm-none-eabi-gdb -ex 'target remote:2331' your.elf
+3. monitor reset
+4. monitor halt
+5. load
+6. cont
+7. happy debugging & flashing
+
+## Pins, Clocks and Peripherals Configuration
+To generate these files it's probably best to go for:
+* [MCUXpresso IDE] (https://www.nxp.com/design/software/development-software/mcuxpresso-software-and-tools-/mcuxpresso-integrated-development-environment-ide:MCUXpresso-IDE): IDE with Config Tools, will let you write code as well as generate code using the SDK for Pins, Clocks and Peripherals. If you're here there's probably a reason why you don't want to use it.
+* [MCUXpresso Config Tools] (https://www.nxp.com/design/software/development-software/mcuxpresso-software-and-tools-/mcuxpresso-config-tools-pins-clocks-peripherals:MCUXpresso-Config-Tools): You probably want to use this to generate the board and device files
+
+If you've got time on your hands can always just use the Kinetis K64 reference manual and write the baremetal code. You'll probably need a fire extinguisher 🔥🔥🔥.
 
 ## Reference Project
 * https://github.com/pisontechnology/nrf52-starter-template
