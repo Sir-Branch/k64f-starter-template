@@ -1,10 +1,9 @@
-# NRF52 Starter Template
-This project contains a starter template and a lot of bundled tools to allow a quick start developing for the Nordic NRF52 on a modern IDE or text editor. It is basically a CMake wrapper ontop of the Nordic SDK version 15.3.
+# K64F Starter Template -- STILL UNDER DEV!
+This project contains a starter template and a lot of bundled tools to allow a quick start developing for the NXP K64F on a your IDE or text editor of choice. It is basically a CMake wrapper ontop of the NXP FRDM-K64F SDK version 2.7.0.
 
 It is not a one-size-fits-all environment, some customization and porting from the original SDK might still be needed, but for the most common and basic stuff, you should be good to go with this.
 
 ## Contents
-* **fw-bootloader-secure**: A version of Nordic's secure bootloader without the board-dependent function calls.
 * **fw-sample**: A minimalist user application as an example.
   - **(Note)** When calling `nRF5x_packageFirmware` within `CMakeLists.txt`, make sure that the digest value of Softdevice matches the one of your current version.
   - **(Note)** We're assuming that all applications are versioned using Semanting Versioning.
