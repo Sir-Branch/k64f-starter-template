@@ -7,9 +7,6 @@ OPTION(DEFINE_DEBUG "Build the project using debugging code" OFF)
 project(MK64F_TEMPLATE)
 # set(MK64F_LINKER_SCRIPT ${PROJECT_DIR_PATH}/linker/K64FN1M0xxx12.ld)
 
-# Configure the GCC toolchain.
-INCLUDE(${CMAKE_CURRENT_SOURCE_DIR}/sdk_cmake/armgcc.cmake)
-
 IF(NOT DEFINED FIRMWARE_TARGET)
     message(FATAL_ERROR "FIRMWARE_TARGET NOT DEFINED")
 ENDIF()

@@ -1,10 +1,12 @@
-INCLUDE(CMakeForceCompiler)
-
 # CROSS COMPILER SETTING
 SET(CMAKE_SYSTEM_NAME Generic)
 CMAKE_MINIMUM_REQUIRED (VERSION 3.6)
 
-project(FW_SAMPLE)
+# Set Project Name (Folder name without fw-)
+get_filename_component(CURR_PROJECT_NAME ${CMAKE_CURRENT_SOURCE_DIR} NAME)
+string(REPLACE "fw-" "" CURR_PROJECT_NAME ${CURR_PROJECT_NAME})
+project(${CURR_PROJECT_NAME} C ASM)
+message("--INFO UPDATED PROJECT_NAME: ${CURR_PROJECT_NAME}")
 
 # ENABLE ASM
 ENABLE_LANGUAGE(ASM)
@@ -17,10 +19,8 @@ SET(CMAKE_EXECUTABLE_LIBRARY_SUFFIX)
 
 # CURRENT DIRECTORY
 SET(ProjDirPath ${CMAKE_CURRENT_SOURCE_DIR})
-
 # SDK Root
 SET(SdkRoot "../sdk_k64f")
-
 # Target Name
 SET(TargetName "blinky")
 
@@ -205,7 +205,7 @@ include_directories(${ProjDirPath}/src)
 include_directories(${ProjDirPath}/src/board)
 include_directories(${ProjDirPath}/src/device)
 
-# Include SDK Directores
+# SDK Directores
 include_directories(${SdkRoot}/CMSIS/Include)
 include_directories(${SdkRoot}/devices)
 include_directories(${SdkRoot}/devices/MK64F12/drivers)

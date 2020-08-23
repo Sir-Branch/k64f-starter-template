@@ -97,3 +97,6 @@ fi
 #if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
 #    . /etc/bash_completion
 #fi
+
+# ARMGCC_DIR
+export ARMGCC_DIR='/opt/arm-none-eabi-gcc'
