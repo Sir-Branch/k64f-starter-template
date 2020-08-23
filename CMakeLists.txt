@@ -21,7 +21,6 @@ SET(LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/bin/${FIRMWARE_TARGET})
 # Load all the relevant git repository information.
 INCLUDE(${CMAKE_CURRENT_SOURCE_DIR}/sdk_cmake/configure_versions.cmake)
 
-
 # if(NOT DEFINED DEBUG_MODE)
 #     MESSAGE(STATUS "DEBUG MODE ENABLED")
 #     ADD_DEFINITIONS(-DDEBUG)

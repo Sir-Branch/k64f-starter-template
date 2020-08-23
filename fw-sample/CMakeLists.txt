@@ -218,20 +218,8 @@ include_directories(${SdkRoot}/components)
 include_directories(${SdkRoot}/components/serial_manager)
 include_directories(${SdkRoot}/components/uart)
 
-
-
 #Application Files 
 file(GLOB_RECURSE APP_SRC_FILES "${ProjDirPath}/src/*.c" "${ProjDirPath}/src/*.h")
-# SDK MK64F12 File
-
-# file(GLOB_RECURSE SDK_SRC_FILES 
-# "${SdkRoot}/devices/MK64F12/*.c"
-# "${SdkRoot}/devices/MK64F12/*.h"
-# "${SdkRoot}/components/*.c"
-# "${SdkRoot}/components/*.h"
-# "${SdkRoot}/rtos/*.c"
-# "${SdkRoot}/rtos/*.h"
-# )
 
 # SDK MK64F12 Files
 file(GLOB SDK_SRC_FILES 
@@ -269,50 +257,9 @@ file(GLOB SDK_SRC_FILES
 "${SdkRoot}/components/serial_manager/serial_port_internal.h"
 "${SdkRoot}/components/uart/uart_adapter.h"
 "${SdkRoot}/components/uart/uart.h"
-
 )
 
 add_executable(${TargetName}.elf ${SDK_SRC_FILES} ${APP_SRC_FILES} )
-
-# Deprecate once I'm able to get everything running
-
-# add_executable(${TargetName}.elf 
-# "${ProjDirPath}/../blinky.c"
-# "${ProjDirPath}/../pin_mux.c"
-# "${ProjDirPath}/../pin_mux.h"
-# "${ProjDirPath}/../board.c"
-# "${ProjDirPath}/../board.h"
-# "${ProjDirPath}/../clock_config.c"
-# "${ProjDirPath}/../clock_config.h"
-# "${ProjDirPath}/../sys_tick.c"
-# "${ProjDirPath}/../sys_tick.h"
-# "${SdkRoot}/devices/MK64F12/drivers/fsl_flash.c"
-# "${SdkRoot}/devices/MK64F12/drivers/fsl_flash.h"
-# "${SdkRoot}/devices/MK64F12/drivers/fsl_gpio.h"
-# "${SdkRoot}/devices/MK64F12/drivers/fsl_gpio.c"
-# "${SdkRoot}/devices/MK64F12/drivers/fsl_common.h"
-# "${SdkRoot}/devices/MK64F12/drivers/fsl_common.c"
-# "${SdkRoot}/devices/MK64F12/drivers/fsl_clock.h"
-# "${SdkRoot}/devices/MK64F12/drivers/fsl_clock.c"
-# "${SdkRoot}/devices/MK64F12/utilities/io/fsl_io.c"
-# "${SdkRoot}/devices/MK64F12/utilities/io/fsl_io.h"
-# "${SdkRoot}/devices/MK64F12/utilities/log/fsl_log.c"
-# "${SdkRoot}/devices/MK64F12/utilities/log/fsl_log.h"
-# "${SdkRoot}/devices/MK64F12/utilities/str/fsl_str.c"
-# "${SdkRoot}/devices/MK64F12/utilities/str/fsl_str.h"
-# "${SdkRoot}/devices/MK64F12/utilities/fsl_debug_console.c"
-# "${SdkRoot}/devices/MK64F12/utilities/fsl_debug_console.h"
-# "${SdkRoot}/devices/MK64F12/utilities/fsl_debug_console_conf.h"
-# "${SdkRoot}/devices/MK64F12/drivers/fsl_port.h"
-# "${SdkRoot}/devices/MK64F12/drivers/fsl_uart.h"
-# "${SdkRoot}/devices/MK64F12/drivers/fsl_uart.c"
-# "${SdkRoot}/devices/MK64F12/drivers/fsl_smc.h"
-# "${SdkRoot}/devices/MK64F12/drivers/fsl_smc.c"
-# "${SdkRoot}/devices/MK64F12/system_MK64F12.c"
-# "${SdkRoot}/devices/MK64F12/system_MK64F12.h"
-# "${SdkRoot}/devices/MK64F12/gcc/startup_MK64F12.S"
-# "${SdkRoot}/devices/MK64F12/utilities/fsl_assert.c"
-# )
 
 add_custom_target(${TargetName}.bin ALL DEPENDS ${CMAKE_BUILD_TYPE}/${TargetName}.elf
   COMMAND ${CMAKE_OBJCOPY} -O binary -S ${CMAKE_BUILD_TYPE}/${TargetName}.elf ${CMAKE_BUILD_TYPE}/${TargetName}.bin
@@ -332,7 +279,6 @@ set(CMAKE_EXE_LINKER_FLAGS_DEBUG "${CMAKE_EXE_LINKER_FLAGS_DEBUG} -T${ProjDirPat
 set(CMAKE_EXE_LINKER_FLAGS_RELEASE "${CMAKE_EXE_LINKER_FLAGS_RELEASE} -T${ProjDirPath}/linker/MK64FN1M0xxx12_flash.ld -static")
 
 # Depricate Once I'm able to make everything Run
-
 # set(CMAKE_EXE_LINKER_FLAGS_DEBUG "${CMAKE_EXE_LINKER_FLAGS_DEBUG} -T${ProjDirPath}/MK64FN1M0xxx12_flash.ld -static")
 # set(CMAKE_EXE_LINKER_FLAGS_RELEASE "${CMAKE_EXE_LINKER_FLAGS_RELEASE} -T${ProjDirPath}/MK64FN1M0xxx12_flash.ld -static")
 
