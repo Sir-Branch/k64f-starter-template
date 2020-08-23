@@ -4,6 +4,8 @@ INCLUDE(CMakeForceCompiler)
 SET(CMAKE_SYSTEM_NAME Generic)
 CMAKE_MINIMUM_REQUIRED (VERSION 3.6)
 
+project(FW_SAMPLE)
+
 # ENABLE ASM
 ENABLE_LANGUAGE(ASM)
 
@@ -79,6 +81,7 @@ SET(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -mfloat-abi=hard")
 SET(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -mfpu=fpv4-sp-d16")
 SET(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -MMD")
 SET(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -MP")
+SET(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -DSERIAL_PORT_TYPE_UART=1")
 
 # C Compiler Flags - Release
 SET(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE} -DNDEBUG")
@@ -104,6 +107,7 @@ SET(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE} -mfloat-abi=hard")
 SET(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE} -mfpu=fpv4-sp-d16")
 SET(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE} -MMD")
 SET(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE} -MP")
+SET(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE} -DSERIAL_PORT_TYPE_UART=1")
 
 # C++ Compiler Flags - Debug
 SET(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -DDEBUG")
@@ -125,6 +129,7 @@ SET(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -mfloat-abi=hard")
 SET(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -mfpu=fpv4-sp-d16")
 SET(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -MMD")
 SET(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -MP")
+SET(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -DSERIAL_PORT_TYPE_UART=1")
 
 # C++ Compiler Flags - Release
 SET(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -DCPU_MK64FN1M0VLL12")
@@ -144,6 +149,7 @@ SET(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -mfloat-abi=hard")
 SET(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -mfpu=fpv4-sp-d16")
 SET(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -MMD")
 SET(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -MP")
+SET(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -DSERIAL_PORT_TYPE_UART=1")
 
 # EXE Linker Flags - Debug
 SET(CMAKE_EXE_LINKER_FLAGS_DEBUG "${CMAKE_EXE_LINKER_FLAGS_DEBUG} -g")
@@ -168,6 +174,7 @@ SET(CMAKE_EXE_LINKER_FLAGS_DEBUG "${CMAKE_EXE_LINKER_FLAGS_DEBUG} muldefs")
 SET(CMAKE_EXE_LINKER_FLAGS_DEBUG "${CMAKE_EXE_LINKER_FLAGS_DEBUG} -mcpu=cortex-m4")
 SET(CMAKE_EXE_LINKER_FLAGS_DEBUG "${CMAKE_EXE_LINKER_FLAGS_DEBUG} -mfloat-abi=hard")
 SET(CMAKE_EXE_LINKER_FLAGS_DEBUG "${CMAKE_EXE_LINKER_FLAGS_DEBUG} -mfpu=fpv4-sp-d16")
+SET(CMAKE_EXE_LINKER_FLAGS_DEBUG "${CMAKE_EXE_LINKER_FLAGS_DEBUG} -DSERIAL_PORT_TYPE_UART=1")
 
 # EXE Linker Flags - Release
 SET(CMAKE_EXE_LINKER_FLAGS_RELEASE "${CMAKE_EXE_LINKER_FLAGS_RELEASE} --specs=nano.specs")
@@ -191,6 +198,7 @@ SET(CMAKE_EXE_LINKER_FLAGS_RELEASE "${CMAKE_EXE_LINKER_FLAGS_RELEASE} muldefs")
 SET(CMAKE_EXE_LINKER_FLAGS_RELEASE "${CMAKE_EXE_LINKER_FLAGS_RELEASE} -mcpu=cortex-m4")
 SET(CMAKE_EXE_LINKER_FLAGS_RELEASE "${CMAKE_EXE_LINKER_FLAGS_RELEASE} -mfloat-abi=hard")
 SET(CMAKE_EXE_LINKER_FLAGS_RELEASE "${CMAKE_EXE_LINKER_FLAGS_RELEASE} -mfpu=fpv4-sp-d16")
+SET(CMAKE_EXE_LINKER_FLAGS_RELEASE "${CMAKE_EXE_LINKER_FLAGS_RELEASE} -DSERIAL_PORT_TYPE_UART=1")
 
 # Application Directories 
 include_directories(${ProjDirPath}/src)
@@ -204,20 +212,64 @@ include_directories(${SdkRoot}/devices/MK64F12/drivers)
 include_directories(${SdkRoot}/devices/MK64F12/utilities/io)
 include_directories(${SdkRoot}/devices/MK64F12/utilities/str)
 include_directories(${SdkRoot}/devices/MK64F12/utilities/log)
-include_directories(${SdkRoot}/devices/MK64F12/utilities)
+include_directories(${SdkRoot}/devices/MK64F12/utilities/debug_console)
 include_directories(${SdkRoot}/devices/MK64F12)
+include_directories(${SdkRoot}/components)
+include_directories(${SdkRoot}/components/serial_manager)
+include_directories(${SdkRoot}/components/uart)
+
+
 
 #Application Files 
-file(GLOB_RECURSE APP_SRC_FILES "${ProjDirPath}/*.c" "${ProjDirPath}/*.h")
-
+file(GLOB_RECURSE APP_SRC_FILES "${ProjDirPath}/src/*.c" "${ProjDirPath}/src/*.h")
 # SDK MK64F12 File
-file(GLOB_RECURSE SDK_SRC_FILES 
-"${SdkRoot}/devices/MK64F12/drivers/*.c" 
-"${SdkRoot}/devices/MK64F12/drivers/*.h"
-"${SdkRoot}/devices/MK64F12/utilities/*.c" 
-"${SdkRoot}/devices/MK64F12/utilities/*.h"
+
+# file(GLOB_RECURSE SDK_SRC_FILES 
+# "${SdkRoot}/devices/MK64F12/*.c"
+# "${SdkRoot}/devices/MK64F12/*.h"
+# "${SdkRoot}/components/*.c"
+# "${SdkRoot}/components/*.h"
+# "${SdkRoot}/rtos/*.c"
+# "${SdkRoot}/rtos/*.h"
+# )
+
+# SDK MK64F12 Files
+file(GLOB SDK_SRC_FILES 
+"${SdkRoot}/devices/MK64F12/drivers/fsl_flash.c"
+"${SdkRoot}/devices/MK64F12/drivers/fsl_flash.h"
+"${SdkRoot}/devices/MK64F12/drivers/fsl_gpio.h"
+"${SdkRoot}/devices/MK64F12/drivers/fsl_gpio.c"
+"${SdkRoot}/devices/MK64F12/drivers/fsl_common.h"
+"${SdkRoot}/devices/MK64F12/drivers/fsl_common.c"
+"${SdkRoot}/devices/MK64F12/drivers/fsl_clock.h"
+"${SdkRoot}/devices/MK64F12/drivers/fsl_clock.c"
+"${SdkRoot}/devices/MK64F12/utilities/io/fsl_io.c"
+"${SdkRoot}/devices/MK64F12/utilities/io/fsl_io.h"
+"${SdkRoot}/devices/MK64F12/utilities/log/fsl_log.c"
+"${SdkRoot}/devices/MK64F12/utilities/log/fsl_log.h"
+"${SdkRoot}/devices/MK64F12/utilities/str/fsl_str.c"
+"${SdkRoot}/devices/MK64F12/utilities/str/fsl_str.h"
+"${SdkRoot}/devices/MK64F12/utilities/fsl_debug_console.c"
+"${SdkRoot}/devices/MK64F12/utilities/fsl_debug_console.h"
+"${SdkRoot}/devices/MK64F12/utilities/fsl_debug_console_conf.h"
+"${SdkRoot}/devices/MK64F12/drivers/fsl_port.h"
+"${SdkRoot}/devices/MK64F12/drivers/fsl_uart.h"
+"${SdkRoot}/devices/MK64F12/drivers/fsl_uart.c"
+"${SdkRoot}/devices/MK64F12/drivers/fsl_smc.h"
+"${SdkRoot}/devices/MK64F12/drivers/fsl_smc.c"
+"${SdkRoot}/devices/MK64F12/drivers/fsl_smc.c"
 "${SdkRoot}/devices/MK64F12/system_MK64F12.c"
 "${SdkRoot}/devices/MK64F12/system_MK64F12.h"
+"${SdkRoot}/devices/MK64F12/mcuxpresso/startup_MK64F12.c"
+"${SdkRoot}/devices/MK64F12/utilities/fsl_assert.c"
+"${SdkRoot}/components/serial_manager/serial_manager.c"
+"${SdkRoot}/components/serial_manager/serial_manager.h"
+"${SdkRoot}/components/serial_manager/serial_port_uart.c"
+"${SdkRoot}/components/serial_manager/serial_port_uart.h"
+"${SdkRoot}/components/serial_manager/serial_port_internal.h"
+"${SdkRoot}/components/uart/uart_adapter.h"
+"${SdkRoot}/components/uart/uart.h"
+
 )
 
 add_executable(${TargetName}.elf ${SDK_SRC_FILES} ${APP_SRC_FILES} )

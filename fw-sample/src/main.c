@@ -38,7 +38,7 @@
 #include "pin_mux.h"
 #include "clock_config.h"
 #include "MK64F12.h"
-// #include "fsl_debug_console.h"
+#include "fsl_debug_console.h"
 /* TODO: insert other include files here. */
 
 /* TODO: insert other definitions and declarations here. */
@@ -53,7 +53,7 @@ int main(void) {
     BOARD_InitBootClocks();
     BOARD_InitBootPeripherals();
   	// /* Init FSL debug console. */
-    // BOARD_InitDebugConsole();
+    BOARD_InitDebugConsole();
 
     PRINTF("Hello World\n");
 
