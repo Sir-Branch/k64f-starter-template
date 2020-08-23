@@ -1,5 +1,5 @@
 # K64F Starter Template -- Not tested waiting for DEV-BOARD!
-This project contains a starter template and a lot of bundled tools to allow a quick start developing for the NXP K64F on your IDE or text editor of choice. It is basically a CMake wrapper ontop of the NXP FRDM-K64F SDK v2.7.0.
+This project contains a starter template and a lot of bundled tools to allow a quick start developing for the NXP K64F on your IDE or text editor of choice.
 
 It is not a one-size-fits-all environment, some customization and porting from the original SDK might still be needed, but for the most common and basic stuff, you should be good to go with this.
 
