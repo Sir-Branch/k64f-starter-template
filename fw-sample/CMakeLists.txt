@@ -260,27 +260,22 @@ file(GLOB SDK_SRC_FILES
 )
 
 add_executable(${TargetName}.elf ${SDK_SRC_FILES} ${APP_SRC_FILES} )
+SET(EXECUTABLE_NAME ${TargetName})
 
-add_custom_target(${TargetName}.bin ALL DEPENDS ${CMAKE_BUILD_TYPE}/${TargetName}.elf
-  COMMAND ${CMAKE_OBJCOPY} -O binary -S ${CMAKE_BUILD_TYPE}/${TargetName}.elf ${CMAKE_BUILD_TYPE}/${TargetName}.bin
-)
-
-add_custom_target(${TargetName}.hex ALL DEPENDS ${CMAKE_BUILD_TYPE}/${TargetName}.elf
-  COMMAND ${CMAKE_OBJCOPY} -O ihex ${CMAKE_BUILD_TYPE}/${TargetName}.elf ${CMAKE_BUILD_TYPE}/${TargetName}.hex
-)
+# Generate .bin and .hex file
+add_custom_target(${EXECUTABLE_NAME}.bin ALL DEPENDS ${CMAKE_BUILD_TYPE}/${EXECUTABLE_NAME}.elf
+            COMMAND ${CMAKE_OBJCOPY} -O binary ${EXECUTABLE_OUTPUT_PATH}/${EXECUTABLE_NAME}.elf "${EXECUTABLE_OUTPUT_PATH}/${EXECUTABLE_NAME}.bin"
+            COMMAND ${CMAKE_OBJCOPY} -O ihex ${EXECUTABLE_OUTPUT_PATH}/${EXECUTABLE_NAME}.elf "${EXECUTABLE_OUTPUT_PATH}/${EXECUTABLE_NAME}.hex"
+            COMMENT "Post build steps for ${EXECUTABLE_NAME}")
 
 set_property( DIRECTORY PROPERTY ADDITIONAL_MAKE_CLEAN_FILES
   "${CMAKE_BUILD_TYPE}/${TargetName}.bin"
   "${CMAKE_BUILD_TYPE}/${TargetName}.hex"
 )
 
-
+# Configure Linker
 set(CMAKE_EXE_LINKER_FLAGS_DEBUG "${CMAKE_EXE_LINKER_FLAGS_DEBUG} -T${ProjDirPath}/linker/MK64FN1M0xxx12_flash.ld -static")
 set(CMAKE_EXE_LINKER_FLAGS_RELEASE "${CMAKE_EXE_LINKER_FLAGS_RELEASE} -T${ProjDirPath}/linker/MK64FN1M0xxx12_flash.ld -static")
-
-# Depricate Once I'm able to make everything Run
-# set(CMAKE_EXE_LINKER_FLAGS_DEBUG "${CMAKE_EXE_LINKER_FLAGS_DEBUG} -T${ProjDirPath}/MK64FN1M0xxx12_flash.ld -static")
-# set(CMAKE_EXE_LINKER_FLAGS_RELEASE "${CMAKE_EXE_LINKER_FLAGS_RELEASE} -T${ProjDirPath}/MK64FN1M0xxx12_flash.ld -static")
 
 TARGET_LINK_LIBRARIES(${TargetName}.elf -Wl,--start-group)
 
