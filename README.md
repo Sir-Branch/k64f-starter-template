@@ -1,23 +1,18 @@
-# K64F Starter Template -- STILL UNDER DEV!
-This project contains a starter template and a lot of bundled tools to allow a quick start developing for the NXP K64F on a your IDE or text editor of choice. It is basically a CMake wrapper ontop of the NXP FRDM-K64F SDK version 2.7.0.
+# K64F Starter Template -- Not tested waiting for DEV-BOARD!
+This project contains a starter template and a lot of bundled tools to allow a quick start developing for the NXP K64F on a your IDE or text editor of choice. It is basically a CMake wrapper ontop of the NXP FRDM-K64F SDK v2.7.0.
 
 It is not a one-size-fits-all environment, some customization and porting from the original SDK might still be needed, but for the most common and basic stuff, you should be good to go with this.
 
 ## Contents
 * **fw-sample**: A minimalist user application as an example.
-  - **(Note)** When calling `nRF5x_packageFirmware` within `CMakeLists.txt`, make sure that the digest value of Softdevice matches the one of your current version.
   - **(Note)** We're assuming that all applications are versioned using Semanting Versioning.
 * **sdk_cmake**: The collection of .cmake files necessary to build this whole thing.
-  Note: You'll probably have to tweak `configure_nordic_sdk.cmake` for your specific use-case.
-* **sdk_nordic**: Here is where the files from the Nordic SDK reside. The contents are almost identical to the v15.3 SDK download, we just removed the examples. In theory, if you want to upgrade to a newer SDK version, replacing the contents of this folder should be enough.
+  Note: You'll have to tweak `fw-<your-project>/CMakeLists.txt` for your specific use-case.
+* **sdk_k64f**: Here is where the files from the NXP FRDM-K64F SDK reside. The contents are almost identical to the v2.7.0 SDK download, the cmake_toolchain_files were moved to the sdk_cmake folder. In theory, if you want to upgrade to a newer SDK version, replacing the contents of this folder should be enough.
 * **toolchain**: All the build scripts for the project in a containerized environment.
-  * Uses nRF Command Line Tools 10.7.0
 * **utils**: General utilities that you'd might find useful.
-  * **cmsis**: CMSIS Configuration Wizard - A graphical tool to modify `sdk_config.h` files.
-  * **keys**: A bash script to use `nrfutil` to create a public-private key pair for DFU purposes.
   * **vscode**: Some useful configurations for Visual Studio Code.
-* **vault**: Where keys are stored. Remember to store your keys safely!
-
+  
 ## Build Environment Installation
 Please follow the installation instructions for each of the supported build environments.
 
