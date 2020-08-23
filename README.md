@@ -57,8 +57,8 @@ To debug,
 
 ## Pins, Clocks and Peripherals Configuration
 To generate these files it's probably best to go for:
-* [MCUXpresso IDE] (https://www.nxp.com/design/software/development-software/mcuxpresso-software-and-tools-/mcuxpresso-integrated-development-environment-ide:MCUXpresso-IDE): IDE with Config Tools, will let you write code as well as generate code using the SDK for Pins, Clocks and Peripherals. If you're here there's probably a reason why you don't want to use it.
-* [MCUXpresso Config Tools] (https://www.nxp.com/design/software/development-software/mcuxpresso-software-and-tools-/mcuxpresso-config-tools-pins-clocks-peripherals:MCUXpresso-Config-Tools): You probably want to use this to generate the board and device files
+* [MCUXpresso IDE](https://www.nxp.com/design/software/development-software/mcuxpresso-software-and-tools-/mcuxpresso-integrated-development-environment-ide:MCUXpresso-IDE): IDE with Config Tools, will let you write code as well as generate code using the SDK for Pins, Clocks and Peripherals. If you're here there's probably a reason why you don't want to use it.
+* [MCUXpresso Config Tools](https://www.nxp.com/design/software/development-software/mcuxpresso-software-and-tools-/mcuxpresso-config-tools-pins-clocks-peripherals:MCUXpresso-Config-Tools): You probably want to use this to generate the board and device files
 
 If you've got time on your hands can always just use the Kinetis K64 reference manual and write the baremetal code. You'll probably need a fire extinguisher 🔥🔥🔥.
 
