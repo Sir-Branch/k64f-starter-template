@@ -1,3 +1,5 @@
+# BASED OFF https://github.com/peakhunt/frdm-k64f-projects/blob/master/blinky/armgcc/CMakeLists.txt
+
 # CROSS COMPILER SETTING
 SET(CMAKE_SYSTEM_NAME Generic)
 CMAKE_MINIMUM_REQUIRED (VERSION 3.6)
@@ -22,7 +24,7 @@ SET(ProjDirPath ${CMAKE_CURRENT_SOURCE_DIR})
 # SDK Root
 SET(SdkRoot "../sdk_k64f")
 # Target Name
-SET(TargetName "blinky")
+SET(TargetName ${CURR_PROJECT_NAME})
 
 # ASM Compiler Flags - Debug
 SET(CMAKE_ASM_FLAGS_DEBUG "${CMAKE_ASM_FLAGS_DEBUG} -DDEBUG")
