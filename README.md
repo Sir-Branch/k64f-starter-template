@@ -66,6 +66,9 @@ If you've got time on your hands can always just use the Kinetis K64 reference m
 * https://github.com/pisontechnology/nrf52-starter-template
 * https://github.com/peakhunt/frdm-k64f-projects
 
+## Useful References
+* https://community.nxp.com/community/mcuxpresso/mcuxpresso-sdk/blog/2019/04/19/tutorial-mcuxpresso-sdk-with-linux-part-1-installation-and-build-with-make
+
 ## License
 All components within this project that have not been bundled from external creators, are licensed under the terms of the [MIT Licence](LICENCE.md).
 
