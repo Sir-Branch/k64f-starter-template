@@ -10,12 +10,12 @@ IF(NOT DEFINED FIRMWARE_TARGET)
     message(FATAL_ERROR "FIRMWARE_TARGET NOT DEFINED")
 ENDIF()
 
-#IMPORTANT NOT MARIO KART 64 D:
-project(MK64F_TEMPLATE C ARM)
 
 # !Set in gcc probably best to override with the ones belows
 SET(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/bin/${FIRMWARE_TARGET})
 SET(LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/bin/${FIRMWARE_TARGET})
+#IMPORTANT NOT MARIO KART 64 D:
+project(MK64F_TEMPLATE C ASM)
 
 # Load all the relevant git repository information.
 INCLUDE(${CMAKE_CURRENT_SOURCE_DIR}/sdk_cmake/configure_versions.cmake)
