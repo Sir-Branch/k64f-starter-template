@@ -18,6 +18,10 @@ SET(LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/bin/${FIRMWARE_TARGET})
 #IMPORTANT NOT MARIO KART 64 D:
 project(MK64F_TEMPLATE C ASM)
 
+# Configure the Nordic SDK
+set(K64F_SDK_PATH "${CMAKE_CURRENT_SOURCE_DIR}/sdk_K64F")
+INCLUDE(${CMAKE_CURRENT_SOURCE_DIR}/sdk_cmake/configure_nxp_sdk.cmake)
+
 # Load all the relevant git repository information.
 INCLUDE(${CMAKE_CURRENT_SOURCE_DIR}/sdk_cmake/configure_versions.cmake)
 
